@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AuthAPI from '@/api/AuthAPI'
+// import AuthAPI from '@/api/AuthAPI'
 
 // import isValidLoginAuthenticatedGuard from '@/guards/isValidLoginAuthenticatedGuard'
-// import { isAuthenticatedGuard, isValidLoginAuthenticatedGuard } from '@/guards/AuthGuard'
+import { isAuthenticatedGuard, isValidLoginAuthenticatedGuard } from '@/guards/AuthGuard'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,7 +17,7 @@ const router = createRouter({
       path: '/reservaciones',
       name: 'appointments',
       meta: { requiresAuth: true },
-      // beforeEnter: [isAuthenticatedGuard],
+      beforeEnter: [isAuthenticatedGuard],
       component: () => import('@/views/appointments/AppointmentsLayout.vue'),
       children: [
         {
@@ -60,7 +60,7 @@ const router = createRouter({
     {
       path: '/auth',
       name: 'auth',
-      // beforeEnter: [isValidLoginAuthenticatedGuard],
+      beforeEnter: [isValidLoginAuthenticatedGuard],
       component: () => import('@/views/auth/AuthLayout.vue'),
       children: [
         {
@@ -87,32 +87,32 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
-  const requiresAuth = to.matched.some((url) => url.meta.requiresAuth)
-  console.log(requiresAuth)
-  console.log('to: ', to)
-  console.log('from :', from)
+// router.beforeEach(async (to, from, next) => {
+//   const requiresAuth = to.matched.some((url) => url.meta.requiresAuth)
+//   console.log(requiresAuth)
+//   console.log('to: ', to)
+//   console.log('from :', from)
 
-  if (requiresAuth) {
-    try {
-      await AuthAPI.auth()
-      console.log('Angel')
-       next()
-    } catch (error) {
-      // console.log(error.response.data.msg)
-       next({ name: 'login' })
-    }
-  } else {
-    try {
-      console.log("0000")
-      const {data} = await AuthAPI.auth()
-      console.log(data)
-      console.log("1111")
-        next({ name: 'my-appointments' })
-    } catch (error) {
-      return next()
-    }
-  }
-})
+//   if (requiresAuth) {
+//     try {
+//       await AuthAPI.auth()
+//       console.log('Angel')
+//        next()
+//     } catch (error) {
+//       // console.log(error.response.data.msg)
+//        next({ name: 'login' })
+//     }
+//   } else {
+//     try {
+//       console.log("0000")
+//       const {data} = await AuthAPI.auth()
+//       console.log(data)
+//       console.log("1111")
+//         next({ name: 'my-appointments' })
+//     } catch (error) {
+//       return next()
+//     }
+//   }
+// })
 
 export default router
