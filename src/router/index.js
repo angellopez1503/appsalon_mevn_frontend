@@ -16,7 +16,6 @@ const router = createRouter({
     {
       path: '/reservaciones',
       name: 'appointments',
-      meta: { requiresAuth: true },
       beforeEnter: [isAuthenticatedGuard],
       component: () => import('@/views/appointments/AppointmentsLayout.vue'),
       children: [
