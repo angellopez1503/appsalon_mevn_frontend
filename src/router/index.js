@@ -113,7 +113,7 @@ router.beforeEach(async (to, from, next) => {
       console.log("1111")
         next({ name: 'my-appointments' })
     } catch (error) {
-      return next()
+       next()
     }
   }
 })

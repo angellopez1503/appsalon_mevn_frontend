@@ -15,6 +15,7 @@ export default {
 
   auth() {
    const token = localStorage.getItem('AUTH_TOKEN')
+   if(!token) throw new Error()
     return api.get('/auth/user', {
       headers: {
         Authorization: `Bearer ${token}`
