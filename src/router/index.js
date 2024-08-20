@@ -96,6 +96,7 @@ router.beforeEach(async (to, from, next) => {
 
 
   console.log(to.matched)
+  console.log(to.matched.length)
 
   next()
 
