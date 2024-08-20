@@ -95,6 +95,7 @@ router.beforeEach(async (to, from, next) => {
   console.log("requiresAuth: ",requiresAuth)
   console.log('to: ', to)
   console.log('from :', from)
+  alert("sasas")
 
   if (requiresAuth) {
     try {
