@@ -17,15 +17,14 @@ const router = createRouter({
     {
       path: '/reservaciones',
       name: 'appointments',
-      meta: {
-        requiresAuth: true
-      },
+      meta: {requiresAuth: true},
       //  beforeEnter: [isAuthenticatedGuard],
       component: () => import('@/views/appointments/AppointmentsLayout.vue'),
       children: [
         {
           path: '',
           name: 'my-appointments',
+          meta: {requiresAuth: true},
           // meta: {
           //   requiresAuth: true
           // },
@@ -33,6 +32,7 @@ const router = createRouter({
         },
         {
           path: 'nueva',
+          meta: {requiresAuth: true},
           // meta: {
           //   requiresAuth: true
           // },
@@ -42,6 +42,7 @@ const router = createRouter({
           children: [
             {
               path: '',
+              meta: {requiresAuth: true},
               // meta: {
               //   requiresAuth: true
               // },
@@ -50,6 +51,7 @@ const router = createRouter({
             },
             {
               path: 'detalles',
+              meta: {requiresAuth: true},
               // meta: {
               //   requiresAuth: true
               // },
@@ -91,29 +93,38 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const requiresAuth = to.matched.some((url) => url.meta.requiresAuth)
-  console.log('requiresAuth: ', requiresAuth)
-  console.log('to: ', to)
-  console.log('from :', from)
+
+
+  console.log(to.matched)
+
+  next()
+
+
+  // const requiresAuth = to.matched.some((url) => url.meta.requiresAuth)
+  // console.log('requiresAuth: ', requiresAuth)
+  // console.log('to: ', to)
+  // console.log('from :', from)
    
-  if (requiresAuth) {
-    try {
+  // if (requiresAuth) {
+  //   try {
     
-      await AuthAPI.auth()
-      next()
-    } catch (error) {
-      // console.log(error.response.data.msg)
-      next({ name: 'login' })
-    }
-  } else {
-    try {
+  //     await AuthAPI.auth()
+  //     next()
+  //   } catch (error) {
+  //     // console.log(error.response.data.msg)
+  //     next({ name: 'login' })
+  //   }
+  // } else {
+  //   try {
      
-      await AuthAPI.auth()
-      next({ name: 'my-appointments' })
-    } catch (error) {
-      next()
-    }
-  }
+  //     await AuthAPI.auth()
+  //     next({ name: 'my-appointments' })
+  //   } catch (error) {
+  //     next()
+  //   }
+  // }
+
+
 })
 
 export default router
