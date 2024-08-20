@@ -99,7 +99,7 @@ router.beforeEach(async (to, from, next) => {
   if (requiresAuth) {
     try {
     
-      await AuthAPI.auth(token)
+      await AuthAPI.auth()
       next()
     } catch (error) {
       // console.log(error.response.data.msg)
@@ -108,7 +108,7 @@ router.beforeEach(async (to, from, next) => {
   } else {
     try {
      
-      await AuthAPI.auth(token)
+      await AuthAPI.auth()
       next({ name: 'my-appointments' })
     } catch (error) {
       next()
