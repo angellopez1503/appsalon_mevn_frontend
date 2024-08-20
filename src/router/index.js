@@ -99,19 +99,15 @@ router.beforeEach(async (to, from, next) => {
   if (requiresAuth) {
     try {
       await AuthAPI.auth()
-      console.log('Angel')
-       next()
+      next()
     } catch (error) {
       // console.log(error.response.data.msg)
        next({ name: 'login' })
     }
   } else {
     try {
-      console.log("0000")
-      const {data} = await AuthAPI.auth()
-      console.log(data)
-      console.log("1111")
-        next({ name: 'my-appointments' })
+      await AuthAPI.auth()
+      next({ name: 'my-appointments' })
     } catch (error) {
        next()
     }
