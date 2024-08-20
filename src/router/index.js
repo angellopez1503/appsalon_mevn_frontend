@@ -103,13 +103,13 @@ router.beforeEach(async (to, from, next) => {
       next()
     } catch (error) {
       // console.log(error.response.data.msg)
-      next({ name: 'login' })
+      return { name: 'login', force:true }
     }
   } else {
     try {
       if(!token) {throw new Error()}
       await AuthAPI.auth(token)
-      next({ name: 'my-appointments' })
+      return { name: 'my-appointments',force:true }
     } catch (error) {
       next()
     }
