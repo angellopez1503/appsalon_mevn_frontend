@@ -98,7 +98,7 @@ router.beforeEach(async (to, from, next) => {
   
   if (requiresAuth) {
     try {
-      if(!token){ throw new Error()}
+     
       await AuthAPI.auth()
       next()
     } catch (error) {
@@ -107,7 +107,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     try {
-      if(!token) {throw new Error()}
+      
       await AuthAPI.auth()
       return { name: 'my-appointments',force:true }
     } catch (error) {
