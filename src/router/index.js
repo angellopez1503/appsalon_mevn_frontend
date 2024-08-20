@@ -17,10 +17,10 @@ const router = createRouter({
     {
       path: '/reservaciones',
       name: 'appointments',
-        meta: {
-            requiresAuth: true
-          },
-    //  beforeEnter: [isAuthenticatedGuard],
+      meta: {
+        requiresAuth: true
+      },
+      //  beforeEnter: [isAuthenticatedGuard],
       component: () => import('@/views/appointments/AppointmentsLayout.vue'),
       children: [
         {
@@ -63,7 +63,7 @@ const router = createRouter({
     {
       path: '/auth',
       name: 'auth',
-    //  beforeEnter: [isValidLoginAuthenticatedGuard],
+      //  beforeEnter: [isValidLoginAuthenticatedGuard],
       component: () => import('@/views/auth/AuthLayout.vue'),
       children: [
         {
@@ -92,7 +92,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some((url) => url.meta.requiresAuth)
-  console.log(requiresAuth)
+  console.log("requiresAuth: ",requiresAuth)
   console.log('to: ', to)
   console.log('from :', from)
 
@@ -102,14 +102,14 @@ router.beforeEach(async (to, from, next) => {
       next()
     } catch (error) {
       // console.log(error.response.data.msg)
-       next({ name: 'login' })
+      next({ name: 'login' })
     }
   } else {
     try {
       await AuthAPI.auth()
       next({ name: 'my-appointments' })
     } catch (error) {
-       next()
+      next()
     }
   }
 })
