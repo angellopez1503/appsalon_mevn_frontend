@@ -99,13 +99,26 @@ router.beforeEach((to, from, next) => {
   console.log(to.matched.length)
 
   if(to.matched.some(item=>item.meta.requiresAuth)){
-      console.log("Privado")
+    try {
+    
+           AuthAPI.auth()
+          next()
+        } catch (error) {
+          // console.log(error.response.data.msg)
+          next({ name: 'login' })
+        }
   } else{
-      console.log("Publico")
+    try {
+     
+         AuthAPI.auth()
+          next({ name: 'my-appointments' })
+        } catch (error) {
+          next()
+        }
   }
 
 
-  next()
+
 
 
   // const requiresAuth = to.matched.some((url) => url.meta.requiresAuth)
