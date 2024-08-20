@@ -101,7 +101,7 @@ router.beforeEach((to, from, next) => {
   if(to.matched.some(item=>item.meta.requiresAuth)){
     try {
     
-           AuthAPI.auth()
+          AuthAPI.auth()
           next()
         } catch (error) {
           // console.log(error.response.data.msg)
