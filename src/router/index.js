@@ -92,7 +92,7 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
 
 
   console.log(to.matched)
