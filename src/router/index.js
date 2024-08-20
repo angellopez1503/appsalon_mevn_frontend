@@ -98,6 +98,13 @@ router.beforeEach(async (to, from, next) => {
   console.log(to.matched)
   console.log(to.matched.length)
 
+  if(to.matched.some(item=>item.meta.requiresAuth)){
+      console.log("Privado")
+  } else{
+      console.log("Publico")
+  }
+
+
   next()
 
 
