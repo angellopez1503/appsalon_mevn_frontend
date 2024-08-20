@@ -98,7 +98,7 @@ router.beforeEach(async (to, from, next) => {
   const token = localStorage.getItem('AUTH_TOKEN')
   if (requiresAuth) {
     try {
-      if(!token) throw new Error()
+      if(!token){ throw new Error()}
       await AuthAPI.auth(token)
       next()
     } catch (error) {
@@ -107,7 +107,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     try {
-      if(!token) throw new Error()
+      if(!token) {throw new Error()}
       await AuthAPI.auth(token)
       next({ name: 'my-appointments' })
     } catch (error) {
