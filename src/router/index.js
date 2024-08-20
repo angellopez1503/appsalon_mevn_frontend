@@ -92,11 +92,9 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some((url) => url.meta.requiresAuth)
-  console.log("requiresAuth: ",requiresAuth)
+  console.log('requiresAuth: ', requiresAuth)
   console.log('to: ', to)
   console.log('from :', from)
-  alert("sasas")
-
   if (requiresAuth) {
     try {
       await AuthAPI.auth()
