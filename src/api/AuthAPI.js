@@ -13,8 +13,8 @@ export default {
     return api.post(`/auth/login`, data)
   },
 
-  auth() {
-   const token = localStorage.getItem('AUTH_TOKEN')
+  auth(token) {
+  //  const token = localStorage.getItem('AUTH_TOKEN')
   //  if(!token){
   //   throw new Error()
   //  }

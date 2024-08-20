@@ -95,9 +95,10 @@ router.beforeEach(async (to, from, next) => {
   console.log('requiresAuth: ', requiresAuth)
   console.log('to: ', to)
   console.log('from :', from)
+  const token = localStorage.getItem('AUTH_TOKEN')
   if (requiresAuth) {
     try {
-      await AuthAPI.auth()
+      await AuthAPI.auth(token)
       next()
     } catch (error) {
       // console.log(error.response.data.msg)
@@ -105,7 +106,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     try {
-      await AuthAPI.auth()
+      await AuthAPI.auth(token)
       next({ name: 'my-appointments' })
     } catch (error) {
       next()
