@@ -95,21 +95,19 @@ router.beforeEach(async (to, from, next) => {
   console.log('requiresAuth: ', requiresAuth)
   console.log('to: ', to)
   console.log('from :', from)
-  
+
   if (requiresAuth) {
     try {
-     
       await AuthAPI.auth()
       next()
     } catch (error) {
       // console.log(error.response.data.msg)
-      return { name: 'login', force:true }
+      return { path: '/auth', force: true }
     }
   } else {
     try {
-      
       await AuthAPI.auth()
-      return { name: 'my-appointments',force:true }
+      return { paht: '/reservaciones', force: true }
     } catch (error) {
       next()
     }
