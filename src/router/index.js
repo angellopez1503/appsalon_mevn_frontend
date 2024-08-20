@@ -90,7 +90,7 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, from) => {
   const requiresAuth = to.matched.some((url) => url.meta.requiresAuth)
   console.log('requiresAuth: ', requiresAuth)
   console.log('to: ', to)
@@ -99,7 +99,7 @@ router.beforeEach(async (to, from, next) => {
   if (requiresAuth) {
     try {
       await AuthAPI.auth()
-      next()
+      return true
     } catch (error) {
       // console.log(error.response.data.msg)
       return { path: '/auth', force: true }
@@ -109,7 +109,7 @@ router.beforeEach(async (to, from, next) => {
       await AuthAPI.auth()
       return { paht: '/reservaciones', force: true }
     } catch (error) {
-      next()
+      return true
     }
   }
 })
